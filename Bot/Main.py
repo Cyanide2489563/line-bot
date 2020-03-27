@@ -34,7 +34,6 @@ def callback():
     except InvalidSignatureError:
         print("Invalid signature. Please check your channel access token/channel secret.")
         abort(400)
-
     return 'OK'
 
 

@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, request, abort
-import configparser
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -7,16 +7,18 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, FlexSendMessage,
 )
+
+from Bot import Config
+from Bot.Youtube_API import Order
+from Bot.video import getCarousel_template_message, create_bubbleContainer, create_flex_template
 
 app = Flask(__name__)
 
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
-handler = WebhookHandler(config.get('line-bot', 'channel_secret'))
+line_bot_api = LineBotApi(Config.get_channel_access_token())
+handler = WebhookHandler(Config.get_channel_secret())
+app.logger.info("Line Bot 初始化完成")
 
 
 @app.route("/callback", methods=['POST'])
@@ -39,10 +41,17 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+    if event.message.text == "最新上傳":
+        line_bot_api.reply_message(event.reply_token, create_flex_template(Order.DATE, 9))
+    if event.message.text == "熱門影片":
+        line_bot_api.reply_message(event.reply_token, create_flex_template(Order.VIEW_COUNT, 9))
+    if event.message.text == "最多喜歡":
+        line_bot_api.reply_message(event.reply_token, create_flex_template(Order.RATING, 9))
+
+    if event.message.text == "直播":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage('目前沒有正在進行的直播'))
 
 
 if __name__ == "__main__":
+    app.debug = True
     app.run()

@@ -8,7 +8,7 @@ from linebot.models import (
 from Bot.Youtube_API import get_videos, Order
 
 
-def getCarousel_template_message(video_sort=Order, carousel_column_amount=5):
+def get_carousel_template_message(video_sort=Order, carousel_column_amount=5):
     if carousel_column_amount > 9:
         return "過多的 columns (必須小於10)"
     columns = []
@@ -79,20 +79,20 @@ def get_video_menu():
 
 
 def create_flex_template(order=Order.DATE, amount=5):
-    thumbnails_url, videoUrl = get_videos('UC-sM_PLqzgktdUcW2LEKKkQ', order, amount)
-    bubbleContainers = []
-    for i in range(len(videoUrl)):
-        bubbleContainers.append(create_bubbleContainer(thumbnails_url[i], videoUrl[i]))
-    bubbleContainers.append(get_video_menu())
+    thumbnails_url, video_url = get_videos('UC-sM_PLqzgktdUcW2LEKKkQ', order, amount)
+    bubble_containers = []
+    for i in range(len(video_url)):
+        bubble_containers.append(create_bubble_container(thumbnails_url[i], video_url[i]))
+    bubble_containers.append(get_video_menu())
     return FlexSendMessage(
         alt_text='test',
         contents=CarouselContainer(
-            contents=bubbleContainers
+            contents=bubble_containers
         )
     )
 
 
-def create_bubbleContainer(thumbnail_image_url, video_url):
+def create_bubble_container(thumbnail_image_url, video_url):
     return BubbleContainer(
         direction='ltr',
         hero=ImageComponent(

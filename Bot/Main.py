@@ -7,12 +7,12 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, FlexSendMessage,
+    MessageEvent, TextMessage, TextSendMessage
 )
 
 from Bot import Config
 from Bot.Youtube_API import Order
-from Bot.video import getCarousel_template_message, create_bubbleContainer, create_flex_template
+from Bot.video import create_flex_template
 
 app = Flask(__name__)
 

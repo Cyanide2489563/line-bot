@@ -33,10 +33,14 @@ def get_videos(channelId, order, amount=5):
     response = request.execute()
 
     thumbnails_urls = []
-    videoUrls = []
+    video_urls = []
     for item in response['items']:
         snippet = item['snippet']
         thumbnails = snippet['thumbnails']
         thumbnails_urls.append('' + (thumbnails['high'])['url'])
-        videoUrls.append('https://www.youtube.com/watch?v=' + (item['id'])['videoId'])
-    return thumbnails_urls, videoUrls
+        video_urls.append('https://www.youtube.com/watch?v=' + (item['id'])['videoId'])
+    return thumbnails_urls, video_urls
+
+
+def get_broadcast():
+    return ''

@@ -47,6 +47,12 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, create_flex_template(Order.VIEW_COUNT, 9))
     if event.message.text == "最多喜歡":
         line_bot_api.reply_message(event.reply_token, create_flex_template(Order.RATING, 9))
+    if event.message.text == "相關影片":
+        line_bot_api.reply_message(event.reply_token, create_flex_template(Order.RELEVANCE, 9))
+    if event.message.text == "標題順序":
+        line_bot_api.reply_message(event.reply_token, create_flex_template(Order.TITLE, 9))
+    if event.message.text == "影片上傳次數":
+        line_bot_api.reply_message(event.reply_token, create_flex_template(Order.VIDEO_COUNT, 9))
 
     if event.message.text == "直播":
         line_bot_api.reply_message(event.reply_token, TextSendMessage('目前沒有正在進行的直播'))

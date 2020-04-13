@@ -46,12 +46,12 @@ def get_carousel_template_message(video_sort=Order, carousel_column_amount=5):
 def get_video_menu():
     return BubbleContainer(
         direction='ltr',
-        hero=ImageComponent(
-            url='https://previews.123rf.com/images/galinadarla/galinadarla1610/galinadarla161000124/67174940-web-site-menu-icon-flat-style-made-in-vector-black-and-white-icon.jpg',
-            size='full',
-            aspectRatio='16:9',
-            aspectMode='cover'
-        ),
+        #hero=ImageComponent(
+        #    url='https://previews.123rf.com/images/galinadarla/galinadarla1610/galinadarla161000124/67174940-web-site-menu-icon-flat-style-made-in-vector-black-and-white-icon.jpg',
+        #    size='full',
+        #    aspectRatio='16:9',
+        #    aspectMode='cover'
+        #),
         body=BoxComponent(
             layout='vertical',
             contents=[
@@ -69,6 +69,24 @@ def get_video_menu():
                 ),
                 ButtonComponent(
                     action=MessageAction(label='最多喜歡', text='最多喜歡'),
+                    style='primary',
+                    color='#29D90C',
+                    margin='lg'
+                ),
+                ButtonComponent(
+                    action=MessageAction(label='相關影片', text='相關影片'),
+                    style='primary',
+                    color='#29D90C',
+                    margin='lg'
+                ),
+                ButtonComponent(
+                    action=MessageAction(label='標題順序', text='標題順序'),
+                    style='primary',
+                    color='#29D90C',
+                    margin='lg'
+                ),
+                ButtonComponent(
+                    action=MessageAction(label='影片上傳次數', text='影片上傳次數'),
                     style='primary',
                     color='#29D90C',
                     margin='lg'
